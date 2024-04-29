@@ -1,10 +1,20 @@
 import axios from "axios";
 import express from "express";
 import jsdom from "jsdom";
+import cors from "cors";
 
 const app = express();
 const { JSDOM } = jsdom;
 
+//CORS config to allow frontend to acess the server.
+//If you're using live server to load your index file then yopu may need to change the origin.
+app.use(
+  cors({
+    origin: "null",
+  })
+);
+
+//Type declaration of our products
 interface ProductType {
   title: string;
   price: string;
@@ -12,9 +22,11 @@ interface ProductType {
   amountOfStars: string;
   imgUrl: string;
 }
-
+//Endpoint "search"
 app.get("/search", async (req, res) => {
+  //retrieve the query parameter from the URL
   const { q } = req.query;
+  //Create a list to store our formated products
   const productList: ProductType[] = [];
 
   await axios({
