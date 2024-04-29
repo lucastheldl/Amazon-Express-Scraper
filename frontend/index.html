@@ -3,12 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link type="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="./style.css" />
     <title>Amazon scraper</title>
   </head>
   <body>
-    <input type="text" placeholder="Search for a product" id="searchInput" />
-    <button onclick="fetchResults()">Search</button>
+    <div class="searchAreaWrapper">
+      <input type="text" placeholder="Search for a product" id="searchInput" />
+      <button onclick="fetchResults()">Search</button>
+    </div>
+    <div class="content"></div>
   </body>
   <script src="./script.js"></script>
 </html>

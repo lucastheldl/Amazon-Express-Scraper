@@ -1,0 +1,27 @@
+body {
+  width: 1120px;
+  margin: 0 auto;
+  padding: 2rem;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  background-color: rgb(154, 192, 207);
+}
+.searchAreaWrapper {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  width: 100%;
+}
+.searchAreaWrapper input {
+  border: none;
+  padding: 0.5rem;
+
+  width: 50%;
+}
+.searchAreaWrapper button {
+  cursor: pointer;
+}
