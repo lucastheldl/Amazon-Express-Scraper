@@ -25,3 +25,16 @@ body {
 .searchAreaWrapper button {
   cursor: pointer;
 }
+.content {
+  max-width: 600px;
+  overflow: hidden;
+}
+
+.cardContainer {
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  background-color: rgb(185, 212, 223);
+}
