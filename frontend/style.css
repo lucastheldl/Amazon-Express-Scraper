@@ -8,7 +8,9 @@ body {
   justify-content: center;
   align-items: center;
 
-  background-color: rgb(154, 192, 207);
+  font-family: Roboto, sans-senrif;
+
+  background-color: rgb(212, 212, 212);
 }
 .searchAreaWrapper {
   display: flex;
@@ -24,17 +26,60 @@ body {
 }
 .searchAreaWrapper button {
   cursor: pointer;
+  border: none;
+}
+.searchAreaWrapper button:hover {
+  background-color: rgb(172, 172, 172);
+  transition: ease-in-out 0.2s;
+
+  color: white;
 }
 .content {
-  max-width: 600px;
-  overflow: hidden;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+
+  margin-top: 2rem;
 }
 
 .cardContainer {
-  padding: 0.5rem;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   gap: 1rem;
 
-  background-color: rgb(185, 212, 223);
+  padding: 0.5rem;
+  min-width: 190px;
+  max-width: 200px;
+  max-height: 500px;
+
+  border-radius: 10px;
+
+  background-color: rgb(224, 224, 224);
+  border: 1px solid gray;
+}
+.imageContainer {
+  width: 200px;
+  overflow: hidden;
+}
+.cardImage {
+  object-fit: cover;
+  width: 200px;
+}
+.cardDescription {
+  display: flex;
+  flex-direction: column;
+}
+.cardPrice {
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+.cardTitle {
+  font-weight: bold;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }

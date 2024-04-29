@@ -1,32 +1,80 @@
+function deleteElements() {
+  const fatherDiv = document.querySelector(".content");
+
+  let child = fatherDiv.lastElementChild;
+  while (child) {
+    fatherDiv.removeChild(child);
+    child = fatherDiv.lastElementChild;
+  }
+}
+
 async function fetchResults() {
-  //Create a list of products to be received
-  let productList = [];
+  //
+  deleteElements();
   //get the query keyword
   const query = document.querySelector("#searchInput").value;
   //check if there's a query
   if (!query) {
     window.alert("Please type a product name!");
+    return;
   }
-  //Send a GET request to the server with the query keyword
-  await fetch(`http://localhost:8080/search?q=${query}`, {
-    method: "GET",
-    headers: { "Content-Type": "application/json" },
-  })
-    .then((response) => response.json())
-    .then((result) => {
-      //Set the result to the products list
-      productList = result;
-    })
-    .catch((error) => {
-      console.error("Error fetching data:", error);
-    });
-  //Call the dispay product method
-  displayProducts(productList);
+  //Send a Ajax GET request to the server with the query keyword
+  let ajax = new XMLHttpRequest();
+
+  ajax.open(`GET`, `http://localhost:8080/search?q=${query}`, true);
+  ajax.onreadystatechange = function () {
+    if (ajax.status === 200 && ajax.readyState === 4) {
+      let res = JSON.parse(ajax.responseText);
+
+      //Call the display products method
+      displayProducts(res);
+      console.log(res);
+    } else {
+      console.log(ajax.status);
+    }
+  };
+  ajax.responseType = "text";
+  ajax.send();
 }
 
 function displayProducts(productList) {
   //Now it will select the destination of the json products on screen
   const fatherDiv = document.querySelector(".content");
-  //Parse the product list to string to be displayed
-  fatherDiv.innerHTML = JSON.stringify(productList, undefined, 4);
+
+  for (let i = 0; i < productList.length; i++) {
+    const cardContainer = document.createElement("div");
+    const descriptionContainer = document.createElement("div");
+    const imageContainer = document.createElement("div");
+    const image = document.createElement("img");
+
+    const titleText = document.createElement("p");
+    const priceText = document.createElement("p");
+    const reviewAmountText = document.createElement("p");
+    const numOfStarText = document.createElement("p");
+
+    cardContainer.classList.add("cardContainer");
+    image.classList.add("cardImage");
+    imageContainer.classList.add("imageContainer");
+    descriptionContainer.classList.add("cardDescription");
+    titleText.classList.add("cardTitle");
+    priceText.classList.add("cardPrice");
+    image.src = productList[i].imgUrl;
+
+    titleText.textContent = productList[i].title;
+    priceText.textContent = productList[i].price;
+    reviewAmountText.textContent =
+      "Reviews: " +
+      (productList[i].reviewAmount === null ? 0 : productList[i].reviewAmount);
+    numOfStarText.textContent = "⭐" + productList[i].amountOfStars;
+
+    fatherDiv.appendChild(cardContainer);
+    imageContainer.appendChild(image);
+    cardContainer.appendChild(imageContainer);
+    cardContainer.appendChild(descriptionContainer);
+
+    descriptionContainer.appendChild(titleText);
+    descriptionContainer.appendChild(priceText);
+    descriptionContainer.appendChild(numOfStarText);
+    descriptionContainer.appendChild(reviewAmountText);
+  }
 }
