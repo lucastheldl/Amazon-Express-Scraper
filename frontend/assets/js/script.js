@@ -41,7 +41,9 @@ function displayProducts(productList) {
   //Now it will select the destination of the json products on screen
   const fatherDiv = document.querySelector(".content");
 
+  //Loop trough the product list to create the card element for each one
   for (let i = 0; i < productList.length; i++) {
+    //Create the elements for the card
     const cardContainer = document.createElement("div");
     const descriptionContainer = document.createElement("div");
     const imageContainer = document.createElement("div");
@@ -52,14 +54,17 @@ function displayProducts(productList) {
     const reviewAmountText = document.createElement("p");
     const numOfStarText = document.createElement("p");
 
+    //Add classes to the created elements
     cardContainer.classList.add("cardContainer");
     image.classList.add("cardImage");
     imageContainer.classList.add("imageContainer");
     descriptionContainer.classList.add("cardDescription");
     titleText.classList.add("cardTitle");
     priceText.classList.add("cardPrice");
+    //set the url to the image element
     image.src = productList[i].imgUrl;
 
+    //Set the text content for the text elements
     titleText.textContent = productList[i].title;
     priceText.textContent = productList[i].price;
     reviewAmountText.textContent =
@@ -67,6 +72,7 @@ function displayProducts(productList) {
       (productList[i].reviewAmount === null ? 0 : productList[i].reviewAmount);
     numOfStarText.textContent = "⭐" + productList[i].amountOfStars;
 
+    //Append the child elements to their parent elements
     fatherDiv.appendChild(cardContainer);
     imageContainer.appendChild(image);
     cardContainer.appendChild(imageContainer);
